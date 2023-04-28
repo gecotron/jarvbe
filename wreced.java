@@ -1,14 +1,3 @@
-public class wreced {
-    public static void main(String[] args) {
-        Rectangle r1 = new Rectangle(0, -5, 6, 5);
-        Rectangle r2 = new Rectangle(-1, 0, 6, 4);
-        System.out.println(r1.perimeter());
-        System.out.println(r2.perimeter());
-        System.out.println(Rectangle.intersection(r1, r2).perimeter());
-        System.out.println(Rectangle.totalPerimeter(r1, r2));
-    }
-}
-
 class Rectangle {
     private int left;
     private int bottom;
@@ -64,7 +53,19 @@ class Rectangle {
             return 2 * (height + width);
         }
     }
-
+    // Check the type of perimetre a rectangle has
+    public char perimType() {
+        // Check if the rectangle is just a line
+        if (width == 0) {
+            return 'l';
+        } else if (height == 0) {
+            return 'l';
+        }
+        // Otherwise return normal rectangle
+        else {
+            return 'r';
+        }
+    }
     // Check if the rectangle contains another rectangle
     public boolean contains(Rectangle rect) {
         if (rect.left >= this.left && rect.bottom >= this.bottom && (rect.left + rect.width) <= (this.left + this.width)
@@ -103,7 +104,12 @@ class Rectangle {
             // Build new rectangle based on intersection
             Rectangle rectC = intersection(rectA, rectB);
             // Gets total perimetre of the two rectangles, accounting for the intersected space
+            // Check if the intersected space is a line
+            if (rectC.perimType() == 'l') {
+                return rectA.perimeter() + rectB.perimeter() - (rectC.perimeter()*2);
+            } else {
             return rectA.perimeter() + rectB.perimeter() - rectC.perimeter();
+            }
         } 
         // If rectangle contains other rectangle, return containing rectangles perimetre
         else if (rectA.contains(rectB)) {
