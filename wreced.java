@@ -1,3 +1,11 @@
+public class wreced {
+    public static void main(String[] args) {
+        Rectangle r1 = new Rectangle(-7, 0, 6, 5);
+        Rectangle r2 = new Rectangle(-1, 0, 6, 4);
+        System.out.println(Rectangle.intersection(r1, r2).toString());
+    }
+}
+
 class Rectangle {
     private int left;
     private int bottom;
@@ -55,17 +63,21 @@ class Rectangle {
     }
     // Check if a rectangle intersects with another rectangle
     public boolean intersect(Rectangle rect) {
-        return this.left < rect.left + rect.width && this.left + this.width > rect.left
-                && this.bottom < rect.bottom + rect.height && this.bottom + this.height > rect.bottom;
-
+        return this.left <= rect.left + rect.width && this.left + this.width >= rect.left
+                && this.bottom <= rect.bottom + rect.height && this.bottom + this.height >= rect.bottom;
     }
-    // create a third 
+    // create a new rectangle based on the intersection of 2 rectangles
     public static Rectangle intersection(Rectangle rectA, Rectangle rectB) {
-        return new Rectangle(Math.max(rectA.left, rectB.left), Math.max(rectA.bottom, rectB.bottom),
+        if (rectA.intersect(rectB) && rectB.intersect(rectA)) {
+            return new Rectangle(Math.max(rectA.left, rectB.left), Math.max(rectA.bottom, rectB.bottom),
                 (Math.min(rectA.left + rectA.width, rectB.left + rectB.width) - Math.max(rectA.left, rectB.left)),
                 (Math.min(rectA.bottom + rectA.height, rectB.bottom + rectB.height) - Math.max(rectA.bottom, rectB.bottom)));
+        }
+        else {
+            return new Rectangle();
+        }
     }
-
+    // Get total perimetre of 2 rectangles
     public static int totalPerimeter(Rectangle rectA, Rectangle rectB) {
         if (!rectA.contains(rectB) && rectA.intersect(rectB)) {
             Rectangle rectC = intersection(rectA, rectB);
