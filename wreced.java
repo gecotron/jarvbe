@@ -3,7 +3,6 @@ class Rectangle {
     private int bottom;
     private int height;
     private int width;
-
     // Base initialisation
     public Rectangle() {
         left = 0;
@@ -11,12 +10,10 @@ class Rectangle {
         height = 0;
         width = 0;
     }
-
     // Basic constructor
     public Rectangle(int l, int b, int w, int h) {
         this.set(l, b, w, h);
     }
-
     // Set Rectangle values
     public void set(int l, int b, int w, int h) {
         left = l;
@@ -39,7 +36,6 @@ class Rectangle {
     public int area() {
         return (height * width);
     }
-
     // Return Perimeter of the rectangle
     public int perimeter() {
         // Check if the rectangle is just a line
@@ -75,13 +71,11 @@ class Rectangle {
             return false;
         }
     }
-
     // Check if a rectangle intersects with another rectangle
     public boolean intersect(Rectangle rect) {
         return this.left <= rect.left + rect.width && this.left + this.width >= rect.left
                 && this.bottom <= rect.bottom + rect.height && this.bottom + this.height >= rect.bottom;
     }
-
     // Create a new rectangle based on the intersection of 2 rectangles
     public static Rectangle intersection(Rectangle rectA, Rectangle rectB) {
         // Checks if the rectangles actually intersect
@@ -96,7 +90,6 @@ class Rectangle {
             return new Rectangle();
         }
     }
-
     // Get total perimetre of 2 rectangles
     public static int totalPerimeter(Rectangle rectA, Rectangle rectB) {
         // Check if the rectangles intersect, and that one reactangle doesn't contain the other
